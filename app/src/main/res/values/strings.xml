@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">MyBook</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Books List</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!-- delete dialog -->
+    <string name="delete_dialog_title">Delete book</string>
+    <string name="delete_dialog_message">Do you confirm to delete this book?</string>
+    <string name="delete_dialog_confirm_button">Confirm</string>
+    <string name="delete_dialog_cancel_button">Cancel</string>
+
+    <!-- book info dialog -->
+    <string name="book_info_dialog_title">Book detail</string>
+    <string name="book_update_dialog_title">Update book</string>
+    <string name="book_name_label">Book name</string>
+    <string name="book_isbn_label">Book ISBN</string>
+    <string name="book_author_label">Book author</string>
+    <string name="book_date_label">Book publish date</string>
+    <string name="book_update_confirm">Confirm</string>
+    <string name="book_update_cancel">Cancel</string>
+
+    <!-- book create dialog -->
+    <string name="book_create_dialog_title">Create a book</string>
+    <string name="book_name_hint">book name</string>
+    <string name="book_isbn_hint">book isbn</string>
+    <string name="book_author_hint">book author</string>
+    <string name="book_date_hint">book publish date</string>
+    <string name="book_create_confirm">Confirm</string>
+    <string name="book_create_cancel">Cancel</string>
+
+</resources>
