@@ -1,8 +1,8 @@
 package com.example.mybook.respository
 
 import com.example.mybook.response.BookResponseData
+import com.example.mybook.response.DeleteResponseData
 import com.example.mybook.response.ResponseData
-import com.example.mybook.response.ResponseObjectData
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -18,7 +18,7 @@ interface ApiService {
     fun addBook(@Body requestBody: RequestBody): Observable<BookResponseData>
 
     @DELETE("delete/{id}")
-    fun deleteBookById(@Path("id") id: Int): Observable<ResponseObjectData>
+    fun deleteBookById(@Path("id") id: Int): Observable<DeleteResponseData>
 
     @PUT("update")
     fun updateBook(@Body requestBody: RequestBody): Observable<BookResponseData>

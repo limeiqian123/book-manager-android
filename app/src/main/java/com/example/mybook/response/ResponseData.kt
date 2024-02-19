@@ -11,11 +11,13 @@ data class ResponseData(
     val data: List<Book> = ArrayList()
 ) : Serializable
 
-data class ResponseObjectData(
+data class DeleteResponseData(
     val code: Int,
     val message: String,
-    val data: Objects
+    val data: Count
 )
+
+data class Count(val count: Int)
 
 data class BookResponseData(
     val code: Int,

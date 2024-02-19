@@ -2,8 +2,8 @@ package com.example.mybook.respository
 
 import com.example.mybook.data.Book
 import com.example.mybook.response.BookResponseData
+import com.example.mybook.response.DeleteResponseData
 import com.example.mybook.response.ResponseData
-import com.example.mybook.response.ResponseObjectData
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,8 +14,6 @@ import okhttp3.RequestBody
 class BookRepository {
 
     private var apiService: ApiService? = null
-
-    //private val gson = GsonBuilder().create()
 
     init {
         apiService = RetrofitClient.getInstance()
@@ -38,7 +36,7 @@ class BookRepository {
         return GsonBuilder().create().toJson(book)
     }
 
-    fun deleteBook(id: Int): Observable<ResponseObjectData>? {
+    fun deleteBook(id: Int): Observable<DeleteResponseData>? {
        return apiService?.deleteBookById(id)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
