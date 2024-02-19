@@ -18,6 +18,9 @@ class BookRepository {
     init {
         apiService = RetrofitClient.getInstance()
     }
+    fun setApiService(apiService: ApiService) {
+        this.apiService = apiService
+    }
 
     fun getAllBooks(): Observable<ResponseData>? {
         return apiService?.getAllBooks()
