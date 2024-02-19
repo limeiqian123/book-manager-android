@@ -1,7 +1,6 @@
 package com.example.mybook.data
 
-import java.util.Date
 
 data class Book (
-    val isbn: String, val name: String, val author: String, val date: String
+    val id: Int? = -1, val isbn: String?, val bookName: String?, val author: String?, val publishTime: String?
 )

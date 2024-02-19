@@ -1,24 +1,60 @@
 package com.example.mybook.respository
 
 import com.example.mybook.data.Book
+import com.example.mybook.response.BookResponseData
+import com.example.mybook.response.ResponseData
+import com.example.mybook.response.ResponseObjectData
+import com.google.gson.GsonBuilder
 import io.reactivex.Observable
-import java.lang.Exception
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.RequestBody
 
 class BookRepository {
 
     private var apiService: ApiService? = null
 
+    //private val gson = GsonBuilder().create()
+
     init {
         apiService = RetrofitClient.getInstance()
     }
 
-    fun getAllBooks() = apiService?.getAllBooks()
+    fun getAllBooks(): Observable<ResponseData>? {
+        return apiService?.getAllBooks()
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+    }
 
-    fun addNewBook(book: Book) = apiService?.addBook(book)
+    fun addNewBook(book: Book): Observable<BookResponseData>? {
+        val requestBody = RequestBody.create(MediaType.parse("application/json"), convertToJsonParams(book))
+        return apiService?.addBook(requestBody)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+    }
 
-    fun deleteBook(isbn: String) = apiService?.deleteBookByIsbn(isbn)
+    private fun convertToJsonParams(book: Book): String {
+        return GsonBuilder().create().toJson(book)
+    }
 
-    fun updateBookByIsbn(isbn: String, book: Book) =
-        apiService?.updateBookByIsbn(isbn, book)
+    fun deleteBook(id: Int): Observable<ResponseObjectData>? {
+       return apiService?.deleteBookById(id)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun queryBookById(id: Int): Observable<BookResponseData>? {
+        return apiService?.queryBookById(id)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun updateBook(book: Book): Observable<BookResponseData>? {
+        val requestBody = RequestBody.create(MediaType.parse("application/json"), convertToJsonParams(book))
+        return apiService?.updateBook(requestBody)
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+    }
 
 }

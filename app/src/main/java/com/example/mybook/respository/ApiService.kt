@@ -1,19 +1,25 @@
 package com.example.mybook.respository
 
-import com.example.mybook.data.Book
+import com.example.mybook.response.BookResponseData
+import com.example.mybook.response.ResponseData
+import com.example.mybook.response.ResponseObjectData
 import io.reactivex.Observable
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
-    @GET("books")
-    fun getAllBooks(): Observable<List<Book>>
+    @GET("list")
+    fun getAllBooks(): Observable<ResponseData>
 
-    @POST("books")
-    fun addBook(@Body book: Book): Observable<String>
+    @GET("get/{id}")
+    fun queryBookById(@Path("id") id: Int): Observable<BookResponseData>
 
-    @PUT("books/{isbn}")
-    fun updateBookByIsbn(@Path("isbn") isbn: String, @Body book: Book): Observable<String>
+    @POST("add")
+    fun addBook(@Body requestBody: RequestBody): Observable<BookResponseData>
 
-    @DELETE("books/{isbn}")
-    fun deleteBookByIsbn(@Path("isbn") isbn: String): Observable<String>
+    @DELETE("delete/{id}")
+    fun deleteBookById(@Path("id") id: Int): Observable<ResponseObjectData>
+
+    @PUT("update")
+    fun updateBook(@Body requestBody: RequestBody): Observable<BookResponseData>
 }
