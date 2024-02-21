@@ -22,5 +22,5 @@ data class Count(val count: Int)
 data class BookResponseData(
     val code: Int,
     val message: String,
-    val data: Book
+    val data: Book?
 )

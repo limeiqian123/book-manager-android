@@ -70,7 +70,20 @@ class BooksPresenterTest {
             displayBookList(getMockBookList())
             hideLoadingView()
         }
+    }
 
+    @Test
+    fun `test fetch book list fail`() {
+        val response: Observable<ResponseData> =
+            Observable.just(ResponseData(400, "", emptyList()))
+        every { repository.getAllBooks() } returns response
+
+        presenter.fetchBookListFromServer()
+        verify(view).apply {
+            showLoadingView()
+            handleErrorView("Failed to retrieve book list.")
+            hideLoadingView()
+        }
     }
 
     @Test

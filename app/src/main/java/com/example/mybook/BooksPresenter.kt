@@ -62,7 +62,7 @@ class BooksPresenter: BasePresenter<BooksContract.View>(), BooksContract.Present
             ?.doOnSubscribe { mView?.showLoadingView() }
             ?.doAfterTerminate { mView?.hideLoadingView() }
             ?.subscribe({ response ->
-                if (response.code == 0) {
+                if (response.code == 0 && response.data != null) {
                     mView?.showBookDetail(response.data)
                 } else {
                     mView?.handleErrorView("Fail to query a book.")

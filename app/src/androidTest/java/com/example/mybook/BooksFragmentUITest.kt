@@ -1,17 +1,22 @@
 package com.example.mybook
 
+import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.action.ViewActions.actionWithAssertions
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeDown
 import androidx.test.espresso.action.ViewActions.swipeUp
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.mybook.adapter.BookAdapter
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -54,7 +59,8 @@ class BooksFragmentUITest {
     fun testShowBookDetailUI() {
         Thread.sleep(5000L)
         onView(withId(R.id.bookRecycleView))
-            .perform(actionWithAssertions(click()))
+            .perform(actionOnItemAtPosition<BookAdapter.BookViewHolder>
+                (0, click()))
         Thread.sleep(5000L)
         onView(withText("Book detail")).check(matches(isDisplayed()))
     }
@@ -68,11 +74,31 @@ class BooksFragmentUITest {
 
     @Test
     fun testUpdateBookUI() {
-
+        Thread.sleep(5000L)
+        onView(withId(R.id.bookRecycleView))
+            .perform(actionOnItemAtPosition<BookAdapter.BookViewHolder>
+                (0, clickChildViewWithId(R.id.bookUpdateButton)))
+        Thread.sleep(3000L)
+        onView(withText("Update book")).check(matches(isDisplayed()))
     }
 
     @Test
     fun testDeleteBookUI() {
+        Thread.sleep(5000L)
+        onView(withId(R.id.bookRecycleView))
+            .perform(scrollToPosition<BookAdapter.BookViewHolder>(6))
+            .perform(actionOnItemAtPosition<BookAdapter.BookViewHolder>
+                (6, clickChildViewWithId(R.id.bookDeleteButton)))
+        Thread.sleep(2000L)
+        onView(withText("Delete book")).check(matches(isDisplayed()))
+    }
 
+    private fun clickChildViewWithId(id: Int) = object : ViewAction {
+        override fun getConstraints() = null
+        override fun getDescription() = "click child view with id $id"
+        override fun perform(uiController: UiController, view: View) {
+            val v = view.findViewById<View>(id)
+            v.performClick()
+        }
     }
 }

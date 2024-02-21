@@ -2,22 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="BooksFragmentUITest">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="testAddBookUI()">
-        <State />
-      </entry>
-      <entry key="testBookListUI() (1)">
-        <State />
-      </entry>
-      <entry key="testShowBookDetailUI()">
-        <State />
-      </entry>
-      <entry key="testUpdateBookUI()">
+      <entry key="testDeleteBookUI()">
         <State />
       </entry>
     </value>
